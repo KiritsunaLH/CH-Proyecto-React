@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <NavBar />
       <h1>Compone</h1>
-      <ItemCount initial={1} onAdd={onAdd} />
+      <ItemCount initial={1} stock={5} onAdd={onAdd} />
     </div>
   );
 }
