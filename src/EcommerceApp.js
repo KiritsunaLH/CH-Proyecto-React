@@ -1,22 +1,35 @@
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+
+import NavBar from './components/NavBar/NavBar';
+import ItemDetailContainer from './components/containers/ItemDetailContainer/ItemDetailContainer';
+import ItemListContainer from './components/containers/ItemListContainer/ItemListContainer';
 
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from './components/NavBar/NavBar';
-import ItemCount from './components/ItemCount/ItemCount';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-function App() {
-
-  const onAdd = (count) => {
-    alert(`La cantidad es: ${count}`)
-}
+function EcomerceApp() {  
 
   return (
-    <div className="App">
-      <NavBar />
-      <h1>Compone</h1>
-      <ItemCount initial={1} stock={5} onAdd={onAdd} />
-    </div>
+    <Router>
+        <div className="block z-0 h-full bg-gray-100">
+          <NavBar />
+          <Switch>
+            <Route exact path="/">
+              <ItemListContainer />
+            </Route>
+            <Route exact path="/category/:category">
+              <ItemListContainer />
+            </Route>
+            <Route exact path="/category/:category">
+              <ItemListContainer />
+            </Route>
+            <Route exact path="/details/:id">
+              <ItemDetailContainer />
+            </Route>
+          </Switch>
+        </div>
+    </Router>
   );
-}
+};
 
-export default App;
+export default EcomerceApp;
