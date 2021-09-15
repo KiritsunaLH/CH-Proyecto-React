@@ -1,6 +1,9 @@
+
 import {Link} from 'react-router-dom'
 
-function Item({item}) {
+
+const Item = ({item}) => {
+
     return (
         <>
             <div key={item.id} className='card w-50 mt-2'>

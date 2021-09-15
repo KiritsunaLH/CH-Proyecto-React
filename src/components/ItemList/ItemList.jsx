@@ -1,7 +1,7 @@
-import React from 'react'
+import {memo} from 'react'
 import Item from '../../../src/components/Item/Item'
 
-function ItemList({items}) {
+const ItemList =memo(({items}) => {
     return (
         <>
            <ul>
@@ -9,6 +9,7 @@ function ItemList({items}) {
             </ul>   
         </>
     )
-}
+},
+(oldProps, newProps)=> oldProps.items.length === newProps.items.length) 
 
 export default ItemList
