@@ -15,7 +15,7 @@ const Item = ({item}) => {
                 </div>
                 <div className="card-footer">
                     {`Price ${item.price}`}<br/>
-                    <Link to="/detail">
+                    <Link to={`/detail/${item.id}`}>
                         <buttom className="btn btn-outline-primary">Detail</buttom>
                     </Link>
                 </div>

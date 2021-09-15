@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 
 import { task } from "../../../../src/utils/promises";
 
@@ -14,14 +14,15 @@ const ItemDetailContainer = () => {
 
     useEffect(() => {
         task.then((response) => {
-            setItem(response.find((i) => parseInt(id) === i.id));
+            setItem(response.find((i) => id === i.id));
             setLoading(false);
         });
     }, [id]);
+    
 
     return (
         <div className="lg:h-1/2 lg:w-1/2 mx-auto">
-            {loading ? <SpinnerAnimation /> : <ItemDetail item={item} />}
+            {loading ? <SpinnerAnimation /> : <ItemDetail producto={item} />}
         </div>
     );
 };

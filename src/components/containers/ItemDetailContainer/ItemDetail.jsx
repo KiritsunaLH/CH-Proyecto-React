@@ -1,21 +1,20 @@
 
-import { useCartContext } from "../../AppContext/CartContext";
+import React, {useContext} from "react";
+
+import { CartContext } from "../../AppContext/CartContext";
 import ItemCount from "../../ItemCount/ItemCount";
 import {Col, Row} from "react-bootstrap";
 
 
-function ItemDetail( props ) {
+const ItemDetail = ({producto}) => {
 
-    const { producto} = props 
-    
-    const {AddToCart} = useCartContext()
-   
-    const onAdd=(cant)=>{
-        console.log(cant)  
-        AddToCart(producto, cant)   
-           
-        
-    }
+    const { setCart, addItem } = useContext(CartContext);
+
+    const onAdd = (count) => {
+    setCart(count);
+    addItem(producto, count);
+    // console.log(count);
+  };
 
     return (
         <>

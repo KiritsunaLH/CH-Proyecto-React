@@ -23,7 +23,7 @@ function NavBar(){
                         </NavLink>
                     </Nav.Link> 
                     <Nav.Link className="ml-2">
-                        <NavLink to={`/category/Weapon}`} style={{textDecoration: 'none'}} className="text-secondary"  activeClassName="text-white">
+                        <NavLink to="category/Weapon" style={{textDecoration: 'none'}} className="text-secondary"  activeClassName="text-white">
                                 Weapons                          
                         </NavLink>                
                     </Nav.Link> 
