@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import { task } from "../../../../src/utils/promises";
-
 import  ItemDetail  from "../../../../src/components/containers/ItemDetailContainer/ItemDetail";
 import  SpinnerAnimation from "../../../../src/components/SpinnerAnimation/SpinnerAnimation";
+
 
 const ItemDetailContainer = () => {
     const [item, setItem] = useState({});
     const [loading, setLoading] = useState(true);
-
     const { id } = useParams();
 
     useEffect(() => {

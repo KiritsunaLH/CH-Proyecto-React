@@ -1,16 +1,19 @@
 import {useState} from 'react';
 import { Link } from 'react-router-dom'
 
-function ItemCount({initial, stock, onAdd}) {
-    const [count, setCount] = useState(initial)
+export const ItemCount = ({stock, onAdd}) => {
+    
+    const initial = 1;
+    const [count, setCount] = useState(initial);
     const [buttonStyle, setButtonStyle] = useState(false)
-
+    
     const handlerInc = () => {
-        setCount(count + 1)
-    }
+        setCount(count +1)
+    };
     const handlerRm = () => {
-        if (count > initial) setCount(count - 1)
-    }
+        if(count > initial) setCount(count - 1)
+    };
+
     const handlerOnAdd=()=> {
         onAdd(count)
         setCount(initial)
@@ -22,7 +25,6 @@ function ItemCount({initial, stock, onAdd}) {
             <button className="btn btn-primary" onClick={handlerInc}>+</button>
             <label>{count}</label>
             <button className="btn btn-primary" onClick={handlerRm}>-</button>
-            <button className="btn btn-primary" onClick={handlerOnAdd}>Agregar</button>
         {
             buttonStyle && 
             <div>

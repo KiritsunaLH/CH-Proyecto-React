@@ -4,10 +4,14 @@ import { NavLink } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
+import {useCartContext} from '../AppContext/CartContext'
 
 
 
 function NavBar(){
+
+    const {cartIcon} = useCartContext()
+
     return( 
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -29,7 +33,7 @@ function NavBar(){
                     </Nav.Link> 
                     <Nav.Link className="ml-2">
                         <NavLink to={`/cart`} style={{textDecoration: 'none'}} className="text-secondary"  activeClassName="text-white">
-                                Cart                            
+                            {cartIcon()}    Cart 
                         </NavLink>                
                     </Nav.Link> 
                     

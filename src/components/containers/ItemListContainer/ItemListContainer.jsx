@@ -1,16 +1,28 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { task } from '../../../../src/utils/promises'
 import ItemList from '../../../../src/components/ItemList/ItemList'
+import { getFirestore } from '../../../service/getFirebase'
+
+
 
 
 function ItemListContainer() {
     const [items, setItems] = useState([])
-
     const { category } = useParams()
-
+    
     useEffect(() => {
+        const db = getFirestore()
+        const itemDB = db.collection("Products")
+        itemDB.get()
+        .then(data => {
+            if(data.size===0){
+                console.log('Nothing is here')
+            }
+            setItems(data.docs.map(item => ({id: item.id, ...item.data()})))
 
+        })
+    }, [category])
+/*
         if (category === undefined) {
             task
                 .then((resp) => setItems(resp))     //guardar en el estado
@@ -21,7 +33,7 @@ function ItemListContainer() {
     }, [category])
 
     console.log(items)
-
+*/
     return (
         <>
             <ItemList items={items} />

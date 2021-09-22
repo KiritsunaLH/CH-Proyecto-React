@@ -6,13 +6,13 @@ import ItemCount from "../../ItemCount/ItemCount";
 import {Col, Row} from "react-bootstrap";
 
 
-const ItemDetail = ({producto}) => {
+const ItemDetail = ({product}) => {
 
     const { setCart, addItem } = useContext(CartContext);
 
     const onAdd = (count) => {
     setCart(count);
-    addItem(producto, count);
+    addItem(product, count);
     // console.log(count);
   };
 
@@ -23,20 +23,20 @@ const ItemDetail = ({producto}) => {
             <Col>
             <div className='card w-50'>
                 <div className="container">
-                    <label>{producto.name}</label>
+                    <label>{product.name}</label>
                 </div>
                 <div className="container">
-                    <img  src={producto.url} alt="" className="w-25" />
+                    <img  src={product.url} alt="" className="w-25" />
                     <br/>
-                    <label>{producto.descripcion}</label>
+                    <label>{product.description}</label>
                 </div>
                 <div className="container">
-                    <label>{producto.price}</label>
+                    <label>{product.price}</label>
                 </div>
             </div>
             </Col>
             <Col>
-            <ItemCount stock={producto.stock} onAdd={onAdd} />
+            <ItemCount stock={product.stock} onAdd={onAdd} />
             </Col>
         </Row>
         </>
