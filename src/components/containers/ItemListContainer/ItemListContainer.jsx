@@ -6,34 +6,27 @@ import { getFirestore } from '../../../service/getFirebase'
 
 
 
-function ItemListContainer() {
-    const [items, setItems] = useState([])
-    const { category } = useParams()
-    
+const ItemListContainer = () => {
+
+    const [items, setItems] = useState([]);
+    const { cat } = useParams();
+  
     useEffect(() => {
-        const db = getFirestore()
-        const itemDB = db.collection("Products")
-        itemDB.get()
-        .then(data => {
-            if(data.size===0){
-                console.log('Nothing is here')
-            }
-            setItems(data.docs.map(item => ({id: item.id, ...item.data()})))
-
-        })
-    }, [category])
-/*
-        if (category === undefined) {
-            task
-                .then((resp) => setItems(resp))     //guardar en el estado
-        } else {
-            task
-                .then((resp) => setItems(resp.filter(r => category === r.categoria)))
+      const db = getFirestore()
+      const iCollection = db.collection('Products').get()
+      iCollection.then(data => {
+        if(data.size !== 0) {
+          console.log("No hay nada")
         }
-    }, [category])
+        setItems( data.docs.map(item => ( {id: item.id, ...item.data()} ) ) )
+        console.log(data)
+      })
+      
 
-    console.log(items)
-*/
+    }, [cat]);
+
+    
+
     return (
         <>
             <ItemList items={items} />

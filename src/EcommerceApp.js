@@ -26,7 +26,7 @@ function EcomerceApp() {
             <Route exact path="/category/:category">
               <ItemListContainer />
             </Route>
-            <Route exact path="/detail/:id">
+            <Route exact path="/detail">
               <ItemDetailContainer />
             </Route>
             <Route path="/cart">

@@ -14,9 +14,9 @@ const Item = ({item}) => {
                     <img src={item.url} alt='imagen' className='w-25' />
                 </div>
                 <div className="card-footer">
-                    {`Price ${item.price}`}<br/>
+                    {`Price $ ${item.price}`}<br/>
                     <Link to={`/detail/${item.id}`}>
-                        <buttom className="btn btn-outline-primary">Detail</buttom>
+                        <button className="btn btn-outline-primary">Detail</button>
                     </Link>
                 </div>
             </div>

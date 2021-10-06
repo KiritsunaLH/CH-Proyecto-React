@@ -6,7 +6,7 @@ import ItemCount from "../../ItemCount/ItemCount";
 import {Col, Row} from "react-bootstrap";
 
 
-const ItemDetail = ({product}) => {
+const ItemDetail = ({product, categories}) => {
 
     const { setCart, addItem } = useContext(CartContext);
 
