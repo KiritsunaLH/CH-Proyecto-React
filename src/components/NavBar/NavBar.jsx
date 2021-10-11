@@ -1,11 +1,8 @@
-
-import { NavLink } from 'react-router-dom'
-
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Container from 'react-bootstrap/Container'
+import Navbar from 'react-bootstrap/Navbar';
+import {Link} from 'react-router-dom';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from "react-bootstrap/NavDropdown";
 import {useCartContext} from '../AppContext/CartContext'
-
 
 
 function NavBar(){
@@ -14,32 +11,27 @@ function NavBar(){
 
     return( 
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Container>
-                <NavLink to="/" style={{textDecoration: 'none'}}>
+                <Link to="/" style={{textDecoration: 'none'}}>
                     <Navbar.Brand to="/">React-Bootstrap</Navbar.Brand>                
-                </NavLink>
+                </Link>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="me-auto">  
-                    <Nav.Link className="ml-2" >
-                        <NavLink to="/category/Bows" style={{textDecoration: 'none'}} className="text-secondary"  activeClassName="text-white">
-                            Bows                            
-                        </NavLink>
-                    </Nav.Link> 
-                    <Nav.Link className="ml-2">
-                        <NavLink to="/category/Weapon" style={{textDecoration: 'none'}} className="text-secondary"  activeClassName="text-white">
-                                Weapons                          
-                        </NavLink>                
-                    </Nav.Link> 
-                    <Nav.Link className="ml-2">
-                        <NavLink to={`/cart`} style={{textDecoration: 'none'}} className="text-secondary"  activeClassName="text-white">
+                <Nav className="me-auto">
+                    <NavDropdown title="Categorias" id="basic-nav-dropdown">
+                        <NavDropdown.Item as={Link} to="/category/Bows">
+                            Bows
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to={'/category/Weapon'}>
+                            Weapons
+                        </NavDropdown.Item>
+                    </NavDropdown>
+                </Nav>
+                <Nav>
+                    <Link to={`/cart`} style={{textDecoration: 'none'}} className="text-secondary ml-2"  activeClassName="text-white">
                             {cartIcon()}    Cart 
-                        </NavLink>                
-                    </Nav.Link> 
-                    
+                    </Link>  
                 </Nav>                
-            </Navbar.Collapse>
-            </Container>            
+            </Navbar.Collapse>          
         </Navbar>
     )
 }

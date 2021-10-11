@@ -1,45 +1,61 @@
 
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
+import { Link } from "react-router-dom";
+import Card from 'react-bootstrap/Card';
+import CardGroup from "react-bootstrap/CardGroup";
+import Button from "react-bootstrap/Button";
 
 import { CartContext } from "../../AppContext/CartContext";
 import ItemCount from "../../ItemCount/ItemCount";
-import {Col, Row} from "react-bootstrap";
 
 
-const ItemDetail = ({product, categories}) => {
+const ItemDetail = ({item}) => {
+    
+    const [count, setCount] = useState(0);
 
-    const { setCart, addItem } = useContext(CartContext);
+    const { addItem } = useContext(CartContext);
 
-    const onAdd = (count) => {
-    setCart(count);
-    addItem(product, count);
-    // console.log(count);
-  };
+    const addHandler = counter => {
+        setCount(counter);
+    };
 
+    const finishPurchase = () => {
+    addItem(item, count);
+    console.log(item);
+    };
+
+    
     return (
-        <>
-        <Row>
-            <label>Soy el detalle</label>
-            <Col>
-            <div className='card w-50'>
-                <div className="container">
-                    <label>{product.name}</label>
+        
+        <CardGroup>
+            <Card>
+                <Card.Img variant="top" src={item.imageID} alt='item image' />
+                <Card.Body>
+                    <Card.Title>{item.name}</Card.Title>
+                        <Card.Text>
+                            {item.description}
+                        </Card.Text>
+                </Card.Body>
+                <Card.Footer>
+                    <small className="text-muted">$ {item.price}</small>
+                </Card.Footer>
+                <div className="mb-4">
+                    {count === 0 ? (
+                    <ItemCount stock={item.stock} initial="1" onAdd={addHandler}
+                    />
+                    ) : (
+                        <Button onClick={finishPurchase} as={Link} to={"/cart"} variant="btn btn-outline-secondary " size="lg">
+                        Add to Cart
+                        </Button>
+                    )}
                 </div>
-                <div className="container">
-                    <img  src={product.url} alt="" className="w-25" />
-                    <br/>
-                    <label>{product.description}</label>
-                </div>
-                <div className="container">
-                    <label>{product.price}</label>
-                </div>
-            </div>
-            </Col>
-            <Col>
-            <ItemCount stock={product.stock} onAdd={onAdd} />
-            </Col>
-        </Row>
-        </>
+                <Link  to={`/`} >
+                    <Button variant="btn btn-outline-secondary" size="sm">
+                        Home
+                    </Button>
+                </Link>
+            </Card>
+        </CardGroup>
     )
 }
 

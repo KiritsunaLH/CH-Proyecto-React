@@ -10,31 +10,20 @@ const ItemDetailContainer = () => {
   const { detailId } = useParams();
   const [loading, setLoading] = useState(true);
 
-
-  const getItems = (id) => {
-    const db = getFirestore();
-    const iCollection = db.collection("Products");
-
-    
-    const item = iCollection.doc(id);
-    console.log('firebase', item);
-    return item.get();
-
-  };
-
   useEffect(() => {
-    getItems(detailId).then((res) => {
-      if (res.exists) {
-        setItem({ id: res.id, ...res.data() });
-        setLoading(false)
-      }
-    });
-    return;
-  }, [detailId]);
+    const db = getFirestore()
+    const cDB = db.collection('Products');
+    cDB.doc(`${detailId}`).get()
+    .then((data)=> {
+      setItem({id: data.data(), ...data.data()})
+      setLoading(false)
+    })
+     
+  }, [detailId])
 
     return (
         <div className="lg:h-1/2 lg:w-1/2 mx-auto">
-            {loading ? <SpinnerAnimation /> : <ItemDetail producto={item} />}
+            {loading ? <SpinnerAnimation /> : <ItemDetail item={item} />}
         </div>
     );
 };

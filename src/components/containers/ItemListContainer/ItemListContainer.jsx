@@ -12,17 +12,34 @@ const ItemListContainer = () => {
     const { cat } = useParams();
   
     useEffect(() => {
-      const db = getFirestore()
-      const iCollection = db.collection('Products').get()
-      iCollection.then(data => {
-        if(data.size !== 0) {
-          console.log("No hay nada")
-        }
-        setItems( data.docs.map(item => ( {id: item.id, ...item.data()} ) ) )
-        console.log(data)
-      })
-      
-
+      const db = getFirestore();
+      const iCollection = db.collection("Products");
+  
+      if (cat) {
+        const filter = iCollection.where("category", "==", cat);
+        const promFilter = filter.get();
+  
+        promFilter.then((snapshot) => {
+          if (snapshot.size > 0) {
+            setItems(
+              snapshot.docs.map((doc) => {
+                return { id: doc.id, ...doc.data() };
+              })
+            );
+          }
+        });
+      } else {
+        const prom = iCollection.get();
+        prom.then((snapshot) => {
+          if (snapshot.size > 0) {
+            setItems(
+              snapshot.docs.map((doc) => {
+                return { id: doc.id, ...doc.data() };
+              })
+            );
+          }
+        });
+      }
     }, [cat]);
 
     
